@@ -57,12 +57,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div>
                             <label for="budgetInput" class="block text-sm font-bold text-slate-300 mb-2">1. Orçamento Total Desejado (BRL)</label>
-                            <input type="number" id="budgetInput" min="1000" placeholder="Ex: 5000" value="5000" class="w-full p-3 rounded-lg text-slate-100 bg-slate-700/50 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-custom-purple/50">
+                           <input type="number" id="budgetInput" [(ngModel)]="budget" (input)="calculateBudget()" min="1000" placeholder="Ex: 5000" class="w-full p-3 rounded-lg text-slate-100 bg-slate-700/50 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-custom-purple/50">
                             <p id="budgetFeedback" class="text-sm mt-1 text-slate-400">R$ 5.000,00</p>
                         </div>
                         <div>
                             <label for="destinationSelect" class="block text-sm font-bold text-slate-300 mb-2">2. Selecione o Destino</label>
-                            <select id="destinationSelect" class="w-full p-3 rounded-lg text-slate-100 bg-slate-700/50 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-custom-purple/50">
+                            <select id="destinationSelect" [(ngModel)]="selectedDestinationKey" (change)="calculateBudget()" class="w-full p-3 rounded-lg text-slate-100 bg-slate-700/50 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-custom-purple/50">
                                 <!-- Destinos Internacionais -->
                                 <option value="paris">Paris, França (Custo Médio-Alto)</option>
                                 <option value="tokyo">Tóquio, Japão (Custo Alto)</option>
@@ -87,7 +87,15 @@
                     <h3 class="text-2xl font-bold text-slate-100 border-b border-slate-700 pb-2 mb-6">Distribuição Sugerida do Orçamento:</h3>
                     
                     <div id="breakdownContainer" class="space-y-4">
-                        <!-- Conteúdo preenchido pelo JavaScript -->
+                        <div *ngIf="budgetResult" class="p-4 rounded-lg mt-4 transition-all" [ngClass]="budgetResult.isPossible ? 'bg-green-900/50 border border-green-500' : 'bg-red-900/50 border border-red-500'">
+    <h4 class="text-xl font-bold" [class.text-green-400]="budgetResult.isPossible" [class.text-red-400]="!budgetResult.isPossible">
+        {{ budgetResult.isPossible ? '✅ Orçamento Suficiente!' : '⚠️ Orçamento Apertado' }}
+    </h4>
+    <p class="text-slate-300 mt-2">Custo estimado para 7 dias em {{ budgetResult.destination }}: <strong class="text-white">R$ {{ budgetResult.totalCost }}</strong></p>
+    <p class="text-sm mt-1" [class.text-green-300]="budgetResult.isPossible" [class.text-red-300]="!budgetResult.isPossible">
+        {{ budgetResult.isPossible ? 'Sobra: R$ ' + budgetResult.difference : 'Faltam: R$ ' + budgetResult.difference }}
+    </p>
+</div>
                     </div>
 
                     <div class="mt-8 text-center">
@@ -110,7 +118,7 @@
 
                 <!-- Destinos Internacionais -->
                 <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 text-custom-purple">Destinos Internacionais</h3>
-                <div id="international-destinations" class="carousel-scroll mb-16">
+                <div #carouselInt class="carousel-scroll mb-16" (mousedown)="startDrag($event, carouselInt)" (mouseleave)="endDrag()" (mouseup)="endDrag()" (mousemove)="moveDrag($event, carouselInt)">
 
                     <!-- Destino 1: Tóquio -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
@@ -127,7 +135,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 6.200</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('tokyo')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -147,7 +155,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 8.900</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('maldivas')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -167,7 +175,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 4.500</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('paris')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -187,7 +195,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 4.800</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('roma')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -207,7 +215,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 6.800</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('santorini')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -227,7 +235,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 3.900</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('buenosaires')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -247,7 +255,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 5.200</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('cancun')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -267,7 +275,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 7.500</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('zurique')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -275,7 +283,7 @@
 
                 <!-- Destinos Nacionais -->
                 <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 text-custom-purple">Destinos Nacionais</h3>
-                <div id="national-destinations" class="carousel-scroll">
+                <div #carouselNac class="carousel-scroll" (mousedown)="startDrag($event, carouselNac)" (mouseleave)="endDrag()" (mouseup)="endDrag()" (mousemove)="moveDrag($event, carouselNac)">
                     <!-- Destino 1: Rio de Janeiro -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
                         <div class="relative">
@@ -290,7 +298,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 2.900</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('riodejaneiro')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -309,7 +317,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 7.500</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('fernandodenoronha')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -328,7 +336,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 3.800</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('gramado')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -347,7 +355,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 2.500</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('portodegalinhas')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -366,7 +374,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 2.100</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('maceio')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -385,7 +393,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 3.200</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('portoseguro')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -404,7 +412,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 4.100</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('chapada')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -423,7 +431,7 @@
                                     <span class="text-xs text-slate-400">A partir de</span>
                                     <span class="text-3xl font-extrabold text-custom-purple">R$ 3.900</span>
                                 </div>
-                                <a href="#" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</a>
+                                <button (click)="openModal('jalapao')" class="bg-custom-purple text-slate-900 font-bold py-2 px-4 rounded-full transition duration-300 hover:bg-custom-purple/80 text-sm">Ver Detalhes</button>
                             </div>
                         </div>
                     </div>
@@ -548,4 +556,31 @@
             <p class="text-center text-sm mt-4 text-slate-400">Ao se cadastrar, você concorda com nossos <a href="#" class="text-custom-purple hover:underline">Termos de Uso</a>.</p>
         </div>
     </div>
+    <div *ngIf="selectedDetail" class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/80 backdrop-blur-sm" (click)="closeModal()"></div>
+
+    <div class="bg-slate-900 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden relative z-10 flex flex-col md:flex-row border border-custom-purple animate-fade-in">
+
+        <div class="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
+            <img [src]="selectedDetail.images[activeImageIndex]" class="w-full h-full object-cover transition-opacity duration-500">
+            <button (click)="nextModalImage()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-custom-purple">
+                ➜
+            </button>
+        </div>
+
+        <div class="w-full md:w-1/2 p-8 flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start">
+                    <h2 class="text-3xl font-extrabold text-white mb-2">{{ selectedDetail.title }}</h2>
+                    <button (click)="closeModal()" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+                </div>
+                <p class="text-custom-purple font-bold text-xl mb-6">{{ selectedDetail.price }}</p>
+                <p class="text-slate-300 leading-relaxed mb-6">{{ selectedDetail.desc }}</p>
+            </div>
+            <button class="w-full bg-custom-purple text-slate-900 font-bold py-4 rounded-xl shadow-lg hover:bg-custom-purple/80 transition transform hover:scale-105">
+                COMPRAR AGORA 🚀
+            </button>
+        </div>
+    </div>
+</div>
 </div>
