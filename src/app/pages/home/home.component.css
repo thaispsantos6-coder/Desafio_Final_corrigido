@@ -125,3 +125,27 @@
 .hover\:bg-custom-purple\/80:hover {
   background-color: rgba(131, 111, 255, 0.8) !important;
 }
+
+/* --- MELHORIA DO CARROSSEL (Visual Limpo) --- */
+
+/* Esconde a barra de rolagem mas mantém funcionando */
+.carousel-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  cursor: grab; /* Mãozinha para indicar que pode arrastar */
+}
+
+.carousel-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Garante que o toque no celular seja suave */
+.carousel-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Quando clicar e segurar (efeito visual) */
+.carousel-scroll:active {
+  cursor: grabbing;
+}
