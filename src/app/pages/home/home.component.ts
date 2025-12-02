@@ -51,31 +51,23 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   // --- LÓGICA DO POP-UP (MODAL) ---
   selectedDetail: any = null;
-  activeImageIndex: number = 0;
 
   detailsDatabase: any = {
-    'tokyo': { title: 'Tóquio, Japão', desc: 'Uma metrópole alucinante onde templos antigos encontram neons futuristas.', price: 'R$ 6.200', images: ['https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800', 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=800'] },
-    'maldivas': { title: 'Ilhas Maldivas', desc: 'O refúgio definitivo. Bangalôs sobre águas turquesas.', price: 'R$ 8.900', images: ['https://images.unsplash.com/photo-1577017040065-660a1ba8f37a?q=80&w=800', 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800'] },
-    'paris': { title: 'Paris, França', desc: 'A cidade luz espera por você com sua gastronomia e arte.', price: 'R$ 4.500', images: ['https://images.unsplash.com/photo-1502602898657-3e91760c0341?q=80&w=800', 'https://images.unsplash.com/photo-1499856871940-a09627c6d7db?q=80&w=800'] },
-    'roma': { title: 'Roma, Itália', desc: 'Um museu a céu aberto. O Coliseu e o Vaticano te esperam.', price: 'R$ 4.800', images: ['https://images.unsplash.com/photo-1527856263669-1581a7b4556a?q=80&w=800', 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=800'] },
-    'default': { title: 'Destino Incrível', desc: 'Prepare-se para viver dias inesquecíveis neste paraíso.', price: 'Consulte', images: ['https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800'] }
+    'tokyo': { title: 'Tóquio, Japão', desc: 'Uma metrópole alucinante onde templos antigos encontram neons futuristas.', price: 'R$ 6.200' },
+    'maldivas': { title: 'Ilhas Maldivas', desc: 'O refúgio definitivo. Bangalôs sobre águas turquesas.', price: 'R$ 8.900' },
+    'paris': { title: 'Paris, França', desc: 'A cidade luz espera por você com sua gastronomia e arte.', price: 'R$ 4.500' },
+    'roma': { title: 'Roma, Itália', desc: 'Um museu a céu aberto. O Coliseu e o Vaticano te esperam.', price: 'R$ 4.800' },
+    'default': { title: 'Destino Incrível', desc: 'Prepare-se para viver dias inesquecíveis neste paraíso.', price: 'Consulte' }
   };
 
   openModal(id: string) {
     this.selectedDetail = this.detailsDatabase[id] || { ...this.detailsDatabase['default'], title: id.toUpperCase() };
-    this.activeImageIndex = 0;
     document.body.style.overflow = 'hidden';
   }
 
   closeModal() {
     this.selectedDetail = null;
     document.body.style.overflow = 'auto';
-  }
-
-  nextModalImage() {
-    if (this.selectedDetail) {
-      this.activeImageIndex = (this.activeImageIndex + 1) % this.selectedDetail.images.length;
-    }
   }
 
   // --- LÓGICA DO MOTOR DO CARROSSEL (ATUALIZADO) ---

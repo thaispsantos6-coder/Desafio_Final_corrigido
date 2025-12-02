@@ -187,9 +187,7 @@
 
                     <!-- Destino 2: Maldivas -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <!--  -->
-                            <img src="https://images.unsplash.com/photo-1577017040065-660a1ba8f37a?q=80&w=1935&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Maldivas+VIP'" alt="Ilhas Maldivas" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(Ilhas maldivas.jpg)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-red-500 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">ÚLTIMAS VAGAS</div>
                         </div>
                         <div class="p-6">
@@ -207,9 +205,7 @@
 
                     <!-- Destino 3: Paris -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <!--  -->
-                            <img src="https://images.unsplash.com/photo-1502602898657-3e91760c0341?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Paris+FR'" alt="Paris, França" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(Paris.jpg)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-slate-500 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">ROMANCE</div>
                         </div>
                         <div class="p-6">
@@ -227,9 +223,7 @@
 
                     <!-- Destino 4: Roma -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <!--  -->
-                            <img src="https://images.unsplash.com/photo-1527856263669-1581a7b4556a?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Roma+IT'" alt="Roma, Itália" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(Roma (3).jpg)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-yellow-500 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">HISTÓRIA</div>
                         </div>
                         <div class="p-6">
@@ -247,9 +241,7 @@
 
                     <!-- Destino 5: Santorini -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <!--  -->
-                            <img src="https://images.unsplash.com/photo-1501380675101-cb7af3587ac5?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Santorini+GR'" alt="Santorini, Grécia" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(Santorini Grécia.jpg)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-blue-500 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">GREGO</div>
                         </div>
                         <div class="p-6">
@@ -287,11 +279,9 @@
 
                     <!-- Destino 7: Cancún -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <!--  -->
-                            <img src="https://images.unsplash.com/photo-1606265295068-7b8ad0e9be70?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Cancun+MX'" alt="Cancún, México" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
-                            <div class="absolute top-4 right-4 bg-teal-500 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">CARIBE</div>
-                        </div>
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(Cancun-méxico.jpg)', 'background-size': 'cover', 'background-position': 'center'}">
+                <div class="absolute top-4 right-4 bg-teal-500 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">CARIBE</div>
+            </div>
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-1 text-slate-100">Cancún, México</h3>
                             <p class="text-slate-400 text-sm mb-4">Praias de água cristalina, resorts all-inclusive e ruínas maias.</p>
@@ -331,8 +321,7 @@
                 <div #carouselNac class="carousel-scroll" (mousedown)="startDrag($event, carouselNac)" (mouseleave)="endDrag()" (mouseup)="endDrag()" (mousemove)="moveDrag($event, carouselNac)">
                     <!-- Destino 1: Rio de Janeiro -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1589710323984-dfc1404c000f?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Rio+Praia+RJ'" alt="Praia do Rio de Janeiro, Brasil" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(RiodeJaneiro2.jpg)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-green-500 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">BRASIL</div>
                         </div>
                         <div class="p-6">
@@ -350,8 +339,7 @@
 
                     <!-- Destino 2: Fernando de Noronha -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1599824606707-16d123b378af?q=80&w=1974&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Noronha+VIP'" alt="Fernando de Noronha, Brasil" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(fernando-de-noronha.png)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-yellow-400 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">ECO LUXO</div>
                         </div>
                         <div class="p-6">
@@ -369,8 +357,7 @@
 
                     <!-- Destino 3: Gramado -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1517441221124-780c888d3637?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Gramado+RS'" alt="Gramado, Brasil" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(Gramado.webp)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-sky-400 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">INVERNO</div>
                         </div>
                         <div class="p-6">
@@ -388,8 +375,7 @@
 
                     <!-- Destino 4: Porto de Galinhas -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1616782293527-316828591b64?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Porto+PE'" alt="Porto de Galinhas, Pernambuco" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(porto-de-galinhas.webp)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-yellow-300 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">PRAIAS</div>
                         </div>
                         <div class="p-6">
@@ -407,8 +393,7 @@
 
                     <!-- Destino 5: Maceió -->
                     <div class="destination-card bg-slate-800 rounded-xl shadow-2xl overflow-hidden transition-all duration-500 card-hover border-t-4 border-custom-purple/0 hover:border-custom-purple">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1601002344793-7808269d0388?q=80&w=2070&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x256/836FFF/ffffff?text=Maceio+AL'" alt="Maceió, Alagoas" class="w-full h-64 object-cover transition-opacity duration-500 group-hover:opacity-90">
+                        <div class="relative w-full h-64" [ngStyle]="{'background-image': 'url(Maceio-Alagoas.jpg)', 'background-size': 'cover', 'background-position': 'center'}">
                             <div class="absolute top-4 right-4 bg-cyan-400 text-slate-900 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">CARIBE BR</div>
                         </div>
                         <div class="p-6">
@@ -604,16 +589,11 @@
     <div *ngIf="selectedDetail" class="fixed inset-0 z-[60] flex items-center justify-center p-4">
     <div class="fixed inset-0 bg-black/80 backdrop-blur-sm" (click)="closeModal()"></div>
 
-    <div class="bg-slate-900 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden relative z-10 flex flex-col md:flex-row border border-custom-purple animate-fade-in">
+    <!-- Modal com tamanho reduzido e sem imagem -->
+    <div class="bg-slate-900 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden relative z-10 flex flex-col border border-custom-purple animate-fade-in">
 
-        <div class="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
-            <img [src]="selectedDetail.images[activeImageIndex]" class="w-full h-full object-cover transition-opacity duration-500">
-            <button (click)="nextModalImage()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-custom-purple">
-                ➜
-            </button>
-        </div>
-
-        <div class="w-full md:w-1/2 p-5 md:p-8 flex flex-col justify-between overflow-y-auto max-h-[50vh] md:max-h-full">
+        <!-- O conteúdo agora ocupa a largura total -->
+        <div class="w-full p-5 md:p-8 flex flex-col justify-between">
             <div>
                 <div class="flex justify-between items-start">
                     <h2 class="text-3xl font-extrabold text-white mb-2">{{ selectedDetail.title }}</h2>
