@@ -25,6 +25,23 @@
 
     <!-- Hero Section -->
     <section class="hero-bg min-h-screen flex items-center justify-center text-white relative pb-20">
+        <!-- VIDEO BACKGROUND -->
+        <button
+  class="sound-toggle"
+  (click)="toggleMute()"
+>
+  {{ isMuted ? '🔇' : '🔊' }}
+</button>
+
+        <div class="video-background-container">
+    <video #backgroundVideo [src]="currentVideo" autoplay muted playsinline (ended)="onVideoEnded()"></video>
+    <button 
+      class="sound-toggle" 
+      (click)="toggleMute()" 
+    > 
+      {{ isMuted ? '🔇' : '🔊' }} 
+    </button> 
+</div>
         <div class="text-center relative z-10 p-4 pt-1 md:pt-4">
             <p
                 class="text-xl md:text-2xl text-custom-purple font-light mb-4 mt-40 md:mt-0 tracking-widest uppercase animate-pulse">

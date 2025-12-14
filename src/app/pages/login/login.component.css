@@ -75,21 +75,21 @@ input:focus {
 }
 
 /* ========================================= 
-   CHECKBOXES (ALINHAMENTO CORRIGIDO)
+   CHECKBOXES (Estilo base para consistência)
    ========================================= */
 .checkbox-group {
   display: flex;
-  align-items: center; /* Alinha verticalmente */
+  align-items: center;
   margin-bottom: 1rem;
   font-size: 0.875rem;
   color: #cbd5e1;
 }
 
 .checkbox-group input[type="checkbox"] {
-  margin-right: 10px; /* Espaço entre o checkbox e o texto */
+  margin-right: 10px;
   width: 16px;
   height: 16px;
-  accent-color: #836FFF; /* Cor do check roxo */
+  accent-color: #836FFF;
 }
 
 .checkbox-group label {
@@ -111,7 +111,6 @@ input:focus {
   transition: background-color 0.2s ease;
   font-size: 1rem;
   text-transform: uppercase;
-  margin-top: 1rem;
 }
 
 .submit-btn:hover {
@@ -124,7 +123,7 @@ input:focus {
 .form-footer {
   text-align: center;
   margin-top: 2rem;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
   color: #94a3b8;
 }
 
@@ -132,15 +131,22 @@ input:focus {
   color: #836FFF;
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .form-footer a:hover {
+  color: #a394ff;
   text-decoration: underline;
 }
 
 .form-footer .back-link {
   display: block;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   color: #94a3b8;
   font-weight: 400;
+}
+
+.form-footer .back-link:hover {
+  color: #ffffff;
+  text-decoration: none;
 }

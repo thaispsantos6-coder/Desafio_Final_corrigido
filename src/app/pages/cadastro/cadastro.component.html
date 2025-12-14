@@ -1,1 +1,39 @@
-<p>cadastro works!</p>
+<div class="form-container-wrapper">
+  <div class="form-card">
+    <div class="form-header">
+      <h2 class="title">Crie sua Conta Premium <span class="diamond">♦</span></h2>
+      <p class="subtitle">Junte-se à elite de viajantes e desbloqueie ofertas exclusivas.</p>
+    </div>
+    
+    <form>
+      <div class="input-group">
+        <input type="text" placeholder="Nome Completo" required>
+      </div>
+      <div class="input-group">
+        <input type="email" placeholder="Seu Melhor E-mail" required>
+      </div>
+      <div class="input-group">
+        <input type="password" placeholder="Crie uma Senha" required>
+      </div>
+      <div class="input-group">
+        <input type="password" placeholder="Confirme a Senha" required>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms">
+        <label for="terms">Eu concordo com os Termos de Serviço</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="privacy">
+        <label for="privacy">Eu concordo com a Política de Privacidade (LGPD)</label>
+      </div>
+      
+      <button type="submit" class="submit-btn">CRIAR CONTA</button>
+    </form>
+    
+    <div class="form-footer">
+      <p>Já faz parte do clube? <a routerLink="/login">Entre aqui</a></p>
+      <a routerLink="/" class="back-link">← Voltar para a Home</a>
+    </div>
+  </div>
+</div>
